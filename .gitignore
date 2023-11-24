@@ -132,6 +132,8 @@ venv.bak/
 plan.MD
 alembic.ini
 migration
+idea.txt
+test.py
 
 
 # Spyder project settings

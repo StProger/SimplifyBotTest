@@ -28,7 +28,7 @@ async def get_shops(last_block):
 
     builder = InlineKeyboardBuilder()
 
-    url = f"https://api.simplify-bots.com/items/routes_level_up_bot?filter[last_block][_eq]={last_block}&sort=row,column"
+    url = f"https://api.simplify-bots.com/items/routes_level_up_bot?filter[last_block][_eq]={last_block}&filter[row][_neq]=None&filter[column][_neq]=None&sort=row,column"
 
     headers = {
         'Authorization': f'Bearer {BEARER_TOKEN}'
@@ -42,10 +42,8 @@ async def get_shops(last_block):
     dict_places = {}
 
     for data in response_data["data"]:
-        print(data)
-        print(dict_places)
 
-        if data["status"] and data["callback_data_special"] is None:
+        if data["status"] and data["row"] is not None:
 
             if dict_places.get(data["row"], None) is None:
 
@@ -70,4 +68,9 @@ async def get_shops(last_block):
             builder.row(list_buttons[0])
             for i in range(len(list_buttons[1:])):
                 builder.add(list_buttons[i])
+    builder.row(
+        types.InlineKeyboardButton(
+            text="Меню🏠", callback_data="go_menu"
+        )
+    )
     return builder.as_markup()

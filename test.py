@@ -12,5 +12,4 @@ for data in response["data"]:
     if data["callback_data_special"] == None:
         print(data)
 
-# print(response.json())
-# print(response.url)
+
