@@ -10,6 +10,13 @@ go_home_router = Router()
 @go_home_router.callback_query(F.data == "go_menu")
 async def go_start_menu(callback: types.CallbackQuery, state: FSMContext, bot: Bot):
 
+    await callback.message.delete()
+
+    message = await bot.send_photo(
+        chat_id=callback.from_user.id,
+        photo=types.FSInputFile('photo/load.jpg')
+    )
+
     await state.clear()
 
     image = types.FSInputFile("photo/logo.jpg")
@@ -19,4 +26,5 @@ async def go_start_menu(callback: types.CallbackQuery, state: FSMContext, bot: B
         photo=image,
         reply_markup=menu.get_menu()
     )
-    await callback.message.delete()
+
+    await message.delete()

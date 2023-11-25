@@ -3,7 +3,12 @@ import aiohttp
 from config import BEARER_TOKEN
 
 
-async def get_last_block(shop_id):
+async def get_last_block(shop_id: str):
+    """
+    Функция для получения информации о последнем блоке
+    :param shop_id:
+    :return:
+    """
 
     # URL для получения блока родителя
     url = f"https://api.simplify-bots.com/items/routes_level_up_bot?filter[id][_eq]={shop_id}"
@@ -27,8 +32,8 @@ async def get_last_block(shop_id):
 
         response_info = await response.json()
 
-    photo_id = response_info["data"][0]["photo"]
-    block_text = response_info["data"][0]["block_text"]
+    photo_id = response_info["data"][0]["photo"]  # Получаем id фотографии
+    block_text = response_info["data"][0]["block_text"]  # Получаем описания фотографии
 
     return last_block_id, photo_id, block_text
 

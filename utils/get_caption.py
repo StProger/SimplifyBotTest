@@ -4,6 +4,11 @@ from config import BEARER_TOKEN
 
 
 async def get_caption(shop_id):
+    """
+    Функция для получения описания фотографии
+    :param shop_id:
+    :return:
+    """
 
     url = f"https://api.simplify-bots.com/items/routes_level_up_bot?filter[id][_eq]={shop_id}"
 

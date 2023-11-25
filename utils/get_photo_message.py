@@ -30,6 +30,24 @@ async def get_photo(last_block_id: str) -> bytes:
 
         response_photo = await session.get(url=url_photo)
 
-        image = await response_photo.read()
+        image = await response_photo.read()  # Получаем фото в байтах
+
+    return image
+
+
+async def get_photo_with_id(photo_id: str) -> bytes:
+
+    headers = {
+        'Authorization': f'Bearer {BEARER_TOKEN}'
+    }
+
+    # URL для получения фотографии
+    url_photo = f"https://api.simplify-bots.com/assets/{photo_id}"
+
+    async with aiohttp.ClientSession(headers=headers) as session:
+
+        response_photo = await session.get(url=url_photo)
+
+        image = await response_photo.read()  # Получаем фото в байтах
 
     return image
